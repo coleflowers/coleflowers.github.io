@@ -18,7 +18,7 @@ title: 小马的Github博客
 	    {% if post.sort == 'skill' %}
 	            <li>
 	                <div class="anchor">
-			    		<span class="icon">{{ page.date | date_to_string }}</span>
+			    		<span class="icon">{{ post.date | date_to_string }}</span>
 			    		<a target="_blank" href="{{ post.url }}" title="{{ post.description }}">{{ post.title }}</a>
 	                </div>
 	            </li>
@@ -35,7 +35,7 @@ title: 小马的Github博客
 	    {% if post.sort == 'other' %}	    
 	            <li>
 	                <div class="anchor">
-			    		<span class="icon">{{ page.date | date_to_string }}</span>
+			    		<span class="icon">{{ post.date | date_to_string }}</span>
 			    		<a target="_blank" href="{{ post.url }}" title="{{ post.description }}">{{ post.title }}</a>
 	                </div>
 	            </li>
