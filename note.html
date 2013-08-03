@@ -1,0 +1,45 @@
+---
+titl: coleflowers的微笔记
+description: 电脑小技巧,人生微感悟,屌丝传,名人名言
+note:
+  - title: 什么是成功
+    main: 其实，所谓成功，无非就是你身边的人，因为有你，而感到快乐。--by 咪蒙
+  - title: 什么是成熟
+    main: 一个人成熟的标志之一就是，明白每天发生在自己身上的99%的事情对于比人而言根本毫无意义。 --by 马克·鲍尔莱因 Mark Bauerlein
+---
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<style type="text/css" media="screen">
+		#content {
+			width: 960px;
+			position: relative;
+			left: 50%;
+			margin: 0px 0px 0px -480px;
+		}
+		{% include topa.css %}
+		#bottom {
+			position: relative;
+			left: 50%;
+			margin-left: -480px;
+			width: 960px;
+			text-align: center;
+			padding: 0px;
+		}
+	</style>
+	<title>{{ page.titl }}</title>
+</head>
+<body>
+{% include topa.html %}
+<div id="content">
+	<h1>{{ page.titl }}</h1>
+	{% for item in page.note %}
+	<div class="content">
+		<h2>{{ item.title }}</h2>
+		<p>{{ item.main }}</p>
+		<hr>
+	</div>
+	{% endfor %}
+</div>
+{% include bottoma.html %}
+</body>
+</html>

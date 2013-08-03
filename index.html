@@ -1,0 +1,59 @@
+---
+layout: index
+title: 小马的Github博客
+---
+<div id="test">
+	<!-- left -->
+	<div id="lf">
+	    <div class="title" id="ctop">
+		    <h1>{{ page.title }}</h1>
+		    <p>--我本福薄人，宜行惜福事；</p>
+	    </div>
+	    <div class="title">
+		    <h2><acronym title="technology article">技术文章</acronym></h2>
+	    </div>
+	    <div>
+	        <ul class="testa">
+	{% for post in site.posts %}
+	    {% if post.sort == 'skill' %}
+	            <li>
+	                <div class="anchor">
+			    		<span class="icon">{{ page.date | date_to_string }}</span>
+			    		<a target="_blank" href="{{ post.url }}" title="{{ post.description }}">{{ post.title }}</a>
+	                </div>
+	            </li>
+	    {% endif %}
+	{% endfor%}
+		</ul>
+	    </div>
+	    <div class="title">
+		    <h2><acronym title="outside technology">杂七杂八</acronym></h2>
+	    </div>
+	    <div>
+	        <ul class="testa">
+	{% for post in site.posts %}
+	    {% if post.sort == 'other' %}	    
+	            <li>
+	                <div class="anchor">
+			    		<span class="icon">{{ page.date | date_to_string }}</span>
+			    		<a target="_blank" href="{{ post.url }}" title="{{ post.description }}">{{ post.title }}</a>
+	                </div>
+	            </li>
+	    {% endif %}
+	{% endfor %}
+	        </ul>
+	    </div>
+	</div>
+	<!-- right -->
+	<div id="rt">
+		<div>
+			<p>80末<br />甘肃人<br />在杭州</p>
+		</div>
+		<div id="weibo">
+			<iframe width="100%" height="700" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=700&fansRow=1&ptype=1&speed=0&skin=2&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=3148693702&verifier=1b38817f&colors=aa1111,dddddd,000000,ffffff,dddddd&dpc=1"></iframe>
+		</div>
+	</div>
+</div>
+<!-- bottom -->
+{% include bottoma.html %}
+

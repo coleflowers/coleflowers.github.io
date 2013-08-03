@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>{{ page.title }}</title>
+	<meta name="description" content="{{ page.description }}" />
+	<link rel="icon" type="image/x-icon" href="{{ site.baseurl }}ma.ico" />
+	<style type="text/css">
+{% include topa.css %}
+		/*----------------主体---------------------------*/
+		#content, #footer, #disqus_thread {
+			position: relative;
+			left: 50%;
+			margin-left: -480px;
+			width:960px;
+			padding: 0px;
+		}
+		#content {
+			margin-top: 4px;
+			border-bottom: #000 dotted thin;
+		}
+		#content p {
+			text-indent: 28px;
+		}
+		#bottom, #info {
+			position: relative;
+			left: 50%;
+			margin-left: -480px;
+			width: 960px;
+			text-align: center;
+			padding: 0px;
+		}
+		#bottom {
+			background: #eee;
+		}
+	</style>
+</head>
+<body>
+{% include topa.html %}
+	<div id="info">
+		<h1>{{ page.title }}</h1>
+		<p>{{ page.date | date_to_string }} by <a href="http://coleflowers.github.io">coleflowers</a></p>
+		<hr />
+	</div>
+
+	<div id="content">
+		{{ content }}
+	</div>
+
+
+<script type="text/javascript" charset="utf-8">
+  var disqus_url = "http://coleflowers.github.io{{ page.url }}";
+  var disqus_developer = 1;
+  var disqus_title = '{{ page.title }}';
+  var disqus_shortname = 'coleflowers';
+</script>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript" src="http://coleflowers.disqus.com/embed.js"></script>
+    
+{% include bottoma.html %}
+</body>
+</html>
