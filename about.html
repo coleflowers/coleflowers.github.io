@@ -1,1 +1,58 @@
-test
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="/styles/default.css">
+	<script src="/scripts/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<h2>测试代码高亮</h2>
+	<pre>
+		<code>
+@echo off
+color 0c
+mode con cols=50 lines=4
+title 域名指向Ip_by coleflowers 18:33 2013/5/19
+setlocal enabledelayedexpansion
+
+rem 设定指定域名到ip然后自杀(*^__^*)
+rem 自杀:开killkey=0关其他
+
+set ipaddress=127.0.0.1
+set domain=editor2d3.com
+set host=%windir%\system32\drivers\etc\hosts
+set self=%0
+set killkey=d
+
+rem 判断是否已经设置过，如果已经设置结束
+set key=0
+for /f "tokens=1,2 eol=# delims= " %%i in (!host!) do (
+ if %%j equ !domain! (set /a key=key+1) else (set /a key=key+0)
+)
+if !key! geq 1 (goto end) else (goto setting)
+exit
+
+:setting
+echo ^#局域网服务器域名解析>>%host%
+echo !ipaddress! !domain!>>%host%
+echo.
+echo       现在你可以通过!domain!访问收藏夹了
+echo.
+pause
+if !killkey! equ 0 (del !self!) else (exit)
+exit
+
+
+:end
+echo.
+echo       域名:!domain!已经设置过跳转了
+echo.
+pause
+if !killkey! equ 0 (del !self!) else (exit)
+exit
+
+		</code>
+	</pre>
+
+</body>
+</html>
