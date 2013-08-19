@@ -1,7 +1,41 @@
 ---
 layout: default
-title: 这个是测试
-description: test，无任何意义
+title: 在windows下如何快速生成文件夹树形结构
+description: 在windows下通过命令行的tree命令快速生成对应文件夹的树形结构
+keywords: dos,bat,windows,文件夹树形结构
 sort: other
 ---
-<p>这个只是测试没有任何意义</p>
+<p styel="background:#eee">有时候为了整理文件夹中的文件，或者写文档，需要一个文件夹的树形结构，文件少的时候一般手工整理就行了，但是如果太多整理起来就很慢了。我用的是windows系统的电脑，进入打开命令行工具，很快就能实现一个文件夹的树形结构，而且非常简单，以下说一下我的两种方法：</p>
+<h2>一、命令行的形式：</h2>
+<p>1.通过开始菜单->运行->输入<span color="#f00;">cmd</span>按enter键打开命令行工具cmd.exe</p>
+<p>2.通过cd命令进入想要生成树形结构的文件夹，比如想生成桌面的树形结构，只需要输入以下命令
+	<pre>
+		<code>
+		cd desktop
+		tree
+		rem 如果想保存到txt的话，可以把上一句代码改成tree>txtname.txt
+		</code>
+	</pre>
+</p>
+<h2>二、用Windows批处理</h2>
+<P>关于Windows批处理，可以参考<a href="http://baike.baidu.com/link?url=VjEmTLn-9vBycHZQnDsjOOQFsUf7gq_EgUTOVta6PhUm5qvKx_seEWHnitoO84hR" target="_blank">bat-百度百科</a>，具体不知道也没事，只要照着下边的做就行了。</p>
+<P>1.复制如下代码到txt
+	<pre>
+		<code>
+	@echo off
+	title 文档树结构
+	color 0C
+	echo.
+	echo      *********************************
+	echo      *生成的txt文档在文件夹父文件夹中*
+	echo      *********************************
+	echo.
+	tree /F %1>>您的文件夹树形结构.txt
+	pause
+		</code>
+	</pre>
+</p>
+<p>2.另存为</p>
+<p>文件->另存为，在文件名那一栏输入<span color="#f00;">"文件夹树形结构生成.bat"</span>，确定即可，注意要用英文双引号，不加双引号的话需要在保存类型那里勾选“所有文件”。</p>
+<p>3.使用</p>
+<p>想要生成那个文件夹的树形结构，只需要把文件夹拖动到“文件夹树形结构生成.bat”的图标上边，在文件夹的父文件夹就会生成一个名为“您的文件夹树形结构.txt”的txt文档，其中就是文件夹的树形结构。</p>
