@@ -44,7 +44,9 @@
 <body>
 {% include topa.html %}
 	<div id="info">
-		<h1>{{ page.title }}</h1>
+		<a href="http://coleflowers.github.io{{ page.url }}">
+			<h1>{{ page.title }}</h1>
+		</a>
 		<p>{{ page.date | date_to_string }} by <a href="http://coleflowers.github.io">coleflowers</a></p>
 		<hr />
 	</div>
