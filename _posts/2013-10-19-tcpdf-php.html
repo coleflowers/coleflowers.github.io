@@ -14,19 +14,23 @@ tcpdf_6_0_039.zip</a>，文档目录如下<b>附录</b></p>
 <h2>自定义LOGO</h2>
 <p>在输出的PDF中，如果保留页脚页眉的话，其中LOGO如果要自定义的话，需要在目录├─images下传入指定名称图片。这样有一个问题，如果要动态传入图片作为LOGO的时候，必须每次都去├─images下操作，经过阅读源代码，我发现，控制LOGO的代码如下<br>
 	<pre><code>
-	if (($headerdata['logo']) AND ($headerdata['logo'] != K_BLANK_IMAGE)) {
-		$imgtype = TCPDF_IMAGES::getImageFileType(K_PATH_IMAGES.$headerdata['logo']);
-		if (($imgtype == 'eps') OR ($imgtype == 'ai')) {
-			$this->ImageEps($headerdata['logo'], '', '', $headerdata['logo_width']);
-		} elseif ($imgtype == 'svg') {
-			$this->ImageSVG($headerdata['logo'], '', '', $headerdata['logo_width']);
-		} else {
-			$this->Image($headerdata['logo'], '', '', $headerdata['logo_width']);
-		}
-		$imgy = $this->getImageRBY();
-	} else { …………
+if (($headerdata['logo']) AND ($headerdata['logo'] != K_BLANK_IMAGE)) {
+	$imgtype = TCPDF_IMAGES::getImageFileType(K_PATH_IMAGES.$headerdata['logo']);
+	if (($imgtype == 'eps') OR ($imgtype == 'ai')) {
+		$this->ImageEps($headerdata['logo'], '', '', $headerdata['logo_width']);
+	} elseif ($imgtype == 'svg') {
+		$this->ImageSVG($headerdata['logo'], '', '', $headerdata['logo_width']);
+	} else {
+		$this->Image($headerdata['logo'], '', '', $headerdata['logo_width']);
+	}
+	$imgy = $this->getImageRBY();
+} else { …………
 	</code></pre>
-每次传入图片的时候，程序都是用的相对位置来处理的，只需要把程序中$headerdata['logo']的地方改成绝对位置，给上边代码中所有$headerdata['logo']前边均缀上常量“K_PATH_IMAGES”（程序有定义的，不用再去定义它的值），例如：<pre><code>$this->ImageEps(K_PATH_IMAGES.$headerdata['logo'], '', '', $headerdata['logo_width']);</code></pre>这样以后每次传入的时候，都可以根据图片地址来自行制定，比如程序中输出的不用的内容需要不用的LOGO的时候方便动态控制。需要注意的是，如果做了以上修改，├─examples目录下的程序如果设置显示页眉页脚，都会出错，这时候只需要设置页眉函数的参数，如example_001.php中，设置页眉的代码<pre><code>$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));</code></pre>需要修改为<pre><code>$pdf->SetHeaderData(K_PATH_IMAGES.'/'.PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));</code></pre>当然要自定义为网络上的图片资源，只需要把第一个参数修改为图片地址组成的字符串，比如这样可以把LOGO改为百度的LOGO图片来输出到PDF：<pre><code>$pdf->SetHeaderData("http://www.baidu.com/img/bdlogo.gif", PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));</code></pre></p>
+每次传入图片的时候，程序都是用的相对位置来处理的，只需要把程序中$headerdata['logo']的地方改成绝对位置，给上边代码中所有$headerdata['logo']前边均缀上常量“K_PATH_IMAGES”（程序有定义的，不用再去定义它的值），例如：<pre><code>$this->ImageEps(K_PATH_IMAGES.$headerdata['logo'], '', '', $headerdata['logo_width']);</code></pre>这样以后每次传入的时候，都可以根据图片地址来自行制定，比如程序中输出的不用的内容需要不用的LOGO的时候方便动态控制。需要注意的是，如果做了以上修改，├─examples目录下的程序如果设置显示页眉页脚，都会出错，这时候只需要设置页眉函数的参数，如example_001.php中，设置页眉的代码<pre><code>
+$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 
+	PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));</code></pre>需要修改为<pre><code>
+$pdf->SetHeaderData(K_PATH_IMAGES.'/'.PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 
+	PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));</code></pre>当然要自定义为网络上的图片资源，只需要把第一个参数修改为图片地址组成的字符串，比如这样可以把LOGO改为百度的LOGO图片来输出到PDF：<pre><code>$pdf->SetHeaderData("http://www.baidu.com/img/bdlogo.gif", PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));</code></pre></p>
 <h2>附录</h2>
 <p>
 <pre>
