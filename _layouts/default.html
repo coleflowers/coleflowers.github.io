@@ -6,9 +6,11 @@
 	<meta name="description" content="{{ page.description }}" />
 	<meta name="keywords" content="{{ page.keywords }}" />
 	<link rel="icon" type="image/x-icon" href="{{ site.baseurl }}ma.ico" />
-{% if post.csskey == 'yes' %}
+{% for post in site.posts %}
+	{% if post.csskey == 'yes' %}
 	<link rel="stylesheet" href="{{ site.baseurl }}styles/{{ post.cssfile }}">
-{% endif %}
+	{% endif %}
+{% endfor%}
 	<link rel="stylesheet" href="{{ site.baseurl }}styles/default.css">
 	<script src="{{ site.baseurl }}scripts/highlight.pack.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
