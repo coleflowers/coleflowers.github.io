@@ -5,8 +5,11 @@ description: github笔记
 keywords: github
 sort: other
 ---
-<p>
+ 
 	
+	<h2>怎么完整下载带有引用其他项目的代码？</h2>
+	<p>有些项目中用到其他开源项目时，可以不用整合整个项目的代码，只是引用。如果单一的<code>git clone</code>对于被引用的项目的代码是没办法下载的，这个时候可以加--recursive参数进行克隆。(关于如何引用其他项目，可以参考:http://segmentfault.com/q/1010000000670427)</p>
+<p>
 	<pre><code>git clone --recursive https://github.com/rs/SDWebImage.git</code></pre>
 这样可以下载链接的其他 git 项目
 </p>
