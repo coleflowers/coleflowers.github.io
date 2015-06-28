@@ -1,13 +1,14 @@
 * a {
 	text-decoration: none;
 }
+* {color: #555;}
 body, #top, #topb, #nav ul {
 	margin: 0px;
 	padding: 0px;
 }
 h1 { /*控制标题h1*/
-	font-family: "微软雅黑";
-	color: #000;
+	font-family: "Microsoft YaHei";
+	color: #555;
 	margin-top: -4px;
 }
 h2 { /*控制标题h2*/
@@ -38,7 +39,7 @@ h2 { /*控制标题h2*/
 #nav li {
 	list-style-type: none;
 	float: left;
-	font-family: "微软雅黑";
+	font-family: "Microsoft YaHei";
 	font-size: 18px;
 	color: #fff;
 	text-align: center;
