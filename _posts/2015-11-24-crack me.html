@@ -1,0 +1,79 @@
+---
+layout: default
+title: Crack Me逆向练习
+description: Crack Me逆向练习
+keywords: crack;ollydbg;exe;逆向;
+sort: other
+---
+	<h1>Crack Me</h1>
+	<p>一份关于逆向学习的实习报告，主要是关于《逆向工程核心原理》第六章第一节中的abexcm1-voiees.exex程序逆向练习。修改后缀为.exe，双击运行如下图：</p>
+	<p><img src="./crack/0001.png" alt=""></p>
+	<p>OllyDbg打开，一路F8到如下截图的地方:</p>
+	<p><img src="./crack/0002.png" alt=""></p>
+	<p>
+		<pre>
+00401000 >/$ 6A 00          PUSH 0                                   ; /Style = MB_OK|MB_APPLMODAL
+00401002  |. 68 00204000    PUSH abexcm1-.00402000                   ; |Title = "abex' 1st crackme"
+00401007  |. 68 12204000    PUSH abexcm1-.00402012                   ; |Text = "Make me think your HD is a CD-Rom."
+0040100C  |. 6A 00          PUSH 0                                   ; |hOwner = NULL
+0040100E  |. E8 4E000000    CALL <JMP.&USER32.MessageBoxA>           ; \MessageBoxA
+00401013  |. 68 94204000    PUSH abexcm1-.00402094                   ; /RootPathName = "c:\"
+00401018  |. E8 38000000    CALL <JMP.&KERNEL32.GetDriveTypeA>       ; \GetDriveTypeA
+0040101D  |. 46             INC ESI
+0040101E  |. 48             DEC EAX
+0040101F  |. EB 00          JMP SHORT abexcm1-.00401021
+00401021  |> 46             INC ESI
+00401022  |. 46             INC ESI
+00401023  |. 48             DEC EAX
+00401024  |. 3BC6           CMP EAX,ESI
+00401026  |. 74 15          JE SHORT abexcm1-.0040103D
+00401028  |. 6A 00          PUSH 0                                   ; /Style = MB_OK|MB_APPLMODAL
+0040102A  |. 68 35204000    PUSH abexcm1-.00402035                   ; |Title = "Error"
+0040102F  |. 68 3B204000    PUSH abexcm1-.0040203B                   ; |Text = "Nah... This is not a CD-ROM Drive!"			
+		</pre>
+	</p>
+	<p>程序在调用了一次MessageBoxA函数后，又调用了一次GetDriveTypeA，而传入的参数是"c:\"，显然是不会有“think your HD is a CD-Rom.”结果的。通过下拉看到JE SHORT abexcm1-.0040103D处也是调用了一个弹框显示消息文字是"Ok, I really think that your HD is a CD-ROM! :p"，如果任务只是让其运行到弹框提示文字"Ok, I really think that your HD is a CD-ROM! :p"的地方，只需要将GetDriveTypeA传入参数改为光驱所在盘符即可，不过我电脑没有光驱(-__-)b。看来只有修改GetDriveTypeA的运行结果了。 </p>
+	<p>通过查询资料(PHP程序员哇，只能查资料了)发现GetDriveType的运行结果：</p>
+	<p><pre>返回值指定驱动器的类型，它可以是以下值之一：
+DRIVE_UNKNOWN：未知磁盘类型；
+DRIVE_NO_ROOT_DIR：根路径无效；
+DRIVE_REMOVABLE：可移动磁盘；
+DRIVE_FIXED：固定磁盘；
+DRIVE_REMOTE：远程驱动器；
+DRIVE_CDROM：光驱；
+DRIVE_RAMDISK：虚拟内存盘。
+易语言中，上述常量的10进制数值为：
+#DRIVE_UNKNOWN=0；
+#DRIVE_NO_ROOT_DIR=1；
+#DRIVE_REMOVABLE=2；
+#DRIVE_FIXED=3；
+#DRIVE_REMOTE=4；
+#DRIVE_CDROM=5；
+#DRIVE_RAMDISK=6。</pre></p>
+<p>运行完GetDriveTypeA，发现此时eax果然是3，如上为，固定磁盘，如下截图：</p>
+<p><img src="./crack/0003.png" alt=""></p>
+<p>直接修改eax为5，一路F8，如下截图:</p>
+<p><img src="./crack/0004.png" alt=""></p>
+<p>那么运行完GetDriveTypeA之后都干了个啥呢？怎么弄个每次双击二次弹框提示"Ok, I really think that your HD is a CD-ROM! :p"的破解程序呢？</p>
+<p><pre>
+INC ESI  ;INC只有一个操作数，它将指定的操作数内容加1，再讲结果送回到该操作数。
+DEC EAX ;DEC是汇编语言中的算术运算指令，起到减1的功能。
+JMP SHORT abexcm1-.00401021 ;无条件跳转: JMP;实际就是下一条指令
+INC ESI ;加1
+INC ESI ;加1
+DEC EAX ;减1
+CMP EAX,ESI ;比较eax esi
+JE SHORT abexcm1-.0040103D ;(ZF)=1,则控制转移
+</pre>
+以上，分析esi 三次加1等于3，eax由3两次减一为1，通过cmp指令ZF为0，此时不会跳转到abexcm1-.0040103D，此处破解可以修改JE为JMP，Ctrl+F2 一路F8修改“JE SHORT abexcm1-.0040103D”为“JMP SHORT abexcm1-.0040103D”,Copy to executable，保存为abexcm1-voiees-JMP.exe，双击运行成功。发散思路，直接修改调用GetDriveTypeA指令为mov eax 5（5为DRIVE_CDROM，即光驱的正常返回值）同样操作保存为abexcm1-voiees-MOV.exe，双击运行成功。前边不是分析cmp 比较的是eax(1)和esi(3)吗，能不能修改esi为直接数1呢？试一试，如下截图:</p>
+<p><img src="./crack/0005.png" alt=""></p>
+<p>cmp后边的语句也错掉了，把esi改为3这条路走不通了，偶然记起来之前有看到某条命令不想让其执行改为Nop，把esi两次加1改掉，让其等于1，操作，如下截图，依前法保存为abexcm1-voiees-NOP.exe，双击运行成功</p>
+<p><img src="./crack/0006.png" alt=""></p>
+
+
+<p>参考：<br>
+1 <a href="http://jingyan.baidu.com/article/219f4bf7d13184de452d3862.html">易语言如何用API枚举磁盘</a><br>
+2 <a href="">学 Win32 汇编[28] - 跳转指令: JMP、JECXZ、JA、JB、JG、JL、JE、JZ、JS、JC、JO、JP 等</a><br>
+3 <a href="http://laokaddk.blog.51cto.com/368606/284280">汇编cmp比较指令详解</a>
+</p>
+ 
