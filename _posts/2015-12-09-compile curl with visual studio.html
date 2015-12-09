@@ -1,0 +1,30 @@
+---
+layout: default
+title: 在windows下用Visual Studio 2012编译curl
+description: 在windows下用Visual Studio 2012编译curl
+keywords: Visual Studio;curl
+sort: other
+---
+<h1>在windows下用Visual Studio 2012编译curl</h1>
+<p>
+<pre>
+@echo off
+rem echo "download code"
+rem echo git clone https://github.com/bagder/curl.git
+cd ./curl/winbuild
+echo "set visual studio"
+call "vcvars32.bat path"
+echo "start compile"
+nmake /f Makefile.vc mode=dll USE_SSSPI=no ENABLE_IDN=no
+echo "compilete"
+pause
+</pre>
+</p>
+<p>
+如上脚本修改call "vcvars32.bat path"，如果不知道路径，可以在Visual Studio的安装目录搜索vcvars32.bat，搜到之后替进去，然后保存为.bat文件，放在curl源码目录外层双击即可自动执行。如果没有源码可以解除git clone那行的注释(即删除"rem",需要安装了git,且设置git.exe的路径到环境变量)。
+</p>
+<p>编译结果在/curl/builds目录中。</p>
+<p>参考：</p>
+<p>
+	<a href="http://dewei.iteye.com/blog/1590979">VC++ 编译libcurl 支持SSL,GZIP</a>
+</p>
