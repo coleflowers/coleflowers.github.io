@@ -22,47 +22,47 @@ sort: other
 		&#60;!-- 拷贝目录 -->
 		&#60;copy file="a.xml" todir="temp" />
 		&#60;!-- 执行 -->
-		<exec executable="a.bat" />
-		<!-- 执行 -->
-		<exec executable="php">
-			<arg value="-r" />
-			<arg value="echo base64_encode('f');" />
-		</exec>
+		&#60;exec executable="a.bat" />
+		&#60;!-- 执行 -->
+		&#60;exec executable="php">
+			&#60;arg value="-r" />
+			&#60;arg value="echo base64_encode('f');" />
+		&#60;/exec>
 		
 	&#60;/target>
 
-	<property name="JDKDIR" value="C:\Program Files\Java\jre7\lib\ext"/>
+	&#60;property name="JDKDIR" value="C:\Program Files\Java\jre7\lib\ext"/>
 
-	<target name="main" depends="des">
-		<echo message="des end" />
+	&#60;target name="main" depends="des">
+		&#60;echo message="des end" />
 	
-		<!-- 数据库 -->
-		<!-- 运行比较慢 先注释了 -->
-		<!-- 		<sql 
+		&#60;!-- 数据库 -->
+		&#60;!-- 运行比较慢 先注释了 -->
+		&#60;!-- 		&#60;sql 
         classpath="${JDKDIR}/mysql-connector-java-5.1.36-bin.jar"
         driver="com.mysql.jdbc.Driver"
         url="jdbc:mysql://127.0.0.1:3306/information_schema"
         userid="用户名"
         password="密码"  >
 		select * FROM TABLES;
-		</sql> -->
+		&#60;/sql> -->
 
-		<!-- 脚本 -->
-		<script language="javascript">
-<![CDATA[
+		&#60;!-- 脚本 -->
+		&#60;script language="javascript">
+&#60;![CDATA[
 
-      for (i=1; i<=10; i++) {
+      for (i=1; i&#60;=10; i++) {
         echo = antStudy.createTask("echo");
         echo.setMessage(i*i);
         echo.perform();
       }
 
     ]]>
-		</script>
+		&#60;/script>
 		
 		&#60;!-- 不支持 -->
 		&#60;!-- &#60;script language="php">
-			<![CDATA[
+			&#60;![CDATA[
 			echo "a";
 			]]>
 		&#60;/script>-->
