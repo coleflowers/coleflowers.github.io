@@ -8,20 +8,20 @@ sort: other
 <h1>ant 学习笔记</h1>
 <p>
 <pre>
-<project name="antStudy" default="main">
-	<!-- 包含 -->
-	<include file="b.xml" />
+&#60;project name="antStudy" default="main">
+	&#60;!-- 包含 -->
+	&#60;include file="b.xml" />
 
-	<target name="des" depends="b.init">
-		<!-- 输出信息 -->
-		<echo message="哈哈哈" />
-		<!-- 删除目录 -->
-		<delete dir="temp" />
-		<!-- 创建目录 -->
-		<mkdir dir="temp" />
-		<!-- 拷贝目录 -->
-		<copy file="a.xml" todir="temp" />
-		<!-- 执行 -->
+	&#60;target name="des" depends="b.init">
+		&#60;!-- 输出信息 -->
+		&#60;echo message="哈哈哈" />
+		&#60;!-- 删除目录 -->
+		&#60;delete dir="temp" />
+		&#60;!-- 创建目录 -->
+		&#60;mkdir dir="temp" />
+		&#60;!-- 拷贝目录 -->
+		&#60;copy file="a.xml" todir="temp" />
+		&#60;!-- 执行 -->
 		<exec executable="a.bat" />
 		<!-- 执行 -->
 		<exec executable="php">
@@ -29,7 +29,7 @@ sort: other
 			<arg value="echo base64_encode('f');" />
 		</exec>
 		
-	</target>
+	&#60;/target>
 
 	<property name="JDKDIR" value="C:\Program Files\Java\jre7\lib\ext"/>
 
@@ -60,16 +60,16 @@ sort: other
     ]]>
 		</script>
 		
-		<!-- 不支持 -->
-		<!-- <script language="php">
+		&#60;!-- 不支持 -->
+		&#60;!-- &#60;script language="php">
 			<![CDATA[
 			echo "a";
 			]]>
-		</script>-->
+		&#60;/script>-->
 
-		<echo message="${ant.project.name}" />
-	</target>
-</project>
+		&#60;echo message="${ant.project.name}" />
+	&#60;/target>
+&#60;/project>
 </pre>
 以上记录完整<a href="/source/antstudy.zip">antstudy.zip</a>
 </p>
