@@ -1,0 +1,77 @@
+---
+layout: default
+title: ant 学习笔记
+description: ant 学习笔记
+keywords: ant;java;
+sort: other
+---
+<h1>ant 学习笔记</h1>
+<p>
+<pre>
+<project name="antStudy" default="main">
+	<!-- 包含 -->
+	<include file="b.xml" />
+
+	<target name="des" depends="b.init">
+		<!-- 输出信息 -->
+		<echo message="哈哈哈" />
+		<!-- 删除目录 -->
+		<delete dir="temp" />
+		<!-- 创建目录 -->
+		<mkdir dir="temp" />
+		<!-- 拷贝目录 -->
+		<copy file="a.xml" todir="temp" />
+		<!-- 执行 -->
+		<exec executable="a.bat" />
+		<!-- 执行 -->
+		<exec executable="php">
+			<arg value="-r" />
+			<arg value="echo base64_encode('f');" />
+		</exec>
+		
+	</target>
+
+	<property name="JDKDIR" value="C:\Program Files\Java\jre7\lib\ext"/>
+
+	<target name="main" depends="des">
+		<echo message="des end" />
+	
+		<!-- 数据库 -->
+		<!-- 运行比较慢 先注释了 -->
+		<!-- 		<sql 
+        classpath="${JDKDIR}/mysql-connector-java-5.1.36-bin.jar"
+        driver="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://127.0.0.1:3306/information_schema"
+        userid="用户名"
+        password="密码"  >
+		select * FROM TABLES;
+		</sql> -->
+
+		<!-- 脚本 -->
+		<script language="javascript">
+<![CDATA[
+
+      for (i=1; i<=10; i++) {
+        echo = antStudy.createTask("echo");
+        echo.setMessage(i*i);
+        echo.perform();
+      }
+
+    ]]>
+		</script>
+		
+		<!-- 不支持 -->
+		<!-- <script language="php">
+			<![CDATA[
+			echo "a";
+			]]>
+		</script>-->
+
+		<echo message="${ant.project.name}" />
+	</target>
+</project>
+</pre>
+以上记录完整<a href="/source/antstudy.zip">antstudy.zip</a>
+</p>
+<p>官方文档<br>
+<a href="http://ant.apache.org/manual/index.html">Apache Ant™ 1.9.6 Manual</a></p>
