@@ -1,0 +1,29 @@
+---
+layout: default
+title: 在windows下编译openssl
+description: 在windows下编译openssl
+keywords: windows;openssl;
+sort: other
+---
+<h1>在windows下编译openssl</h1>
+<p>平时工作大多数时间都在用php、java做一些简单网站，近一年也做过两个iOS的APP，接触的越多，感觉要学的越多，最近想看看几个有名的开源项目，先练习练习编译:)</p>
+<p>本次练习是openssl的编译，可以在<a href="https://github.com/openssl/openssl/releases" target="_blank">github</a>下载到openssl源码，我下载的是openssl-OpenSSL_0_9_8a.zip</p>
+<p>找了几篇文档大意都是参照INSTALL.W32文件，试着执行了以下命令组合：</p>
+<p>
+	<pre>
+		perl Configure VC-WIN32
+		ms\do_masm
+		nmake -f ms\ntdll.mak
+	</pre>
+</p>
+<p>需要注意的是Windows下没有perl，需要安装ActiveState Perl 下载地址 <a href="http://downloads.activestate.com/ActivePerl/releases/5.22.1.2201/ActivePerl-5.22.1.2201-MSWin32-x64-299574.msi" target="_blank">http://downloads.activestate.com/ActivePerl/releases/5.22.1.2201/ActivePerl-5.22.1.2201-MSWin32-x64-299574.msi</a>(下载页面:http://www.activestate.com/activeperl/downloads)</p>
+<p>执行过程需要设置VS的环境变量，我准备编译32位的，所以执行了Microsoft Visual Studio 11.0\Common7\Tools\vsvars32.bat。具体是在执行命令nmake -f ms\ntdll.mak前执行命令行 <code>call "路径:\\vsvars32.bat"</code></p>
+<p>编译过程遇到以下错误:</p>
+<p><img src="/images/20160127/000.png" width="500px" alt=""></p>
+<p><img src="/images/20160127/001.png" width="500px" alt=""></p>
+<p><img src="/images/20160127/002.png" width="500px" alt=""></p>
+<p><img src="/images/20160127/003.png" width="500px" alt=""></p>
+<p><img src="/images/20160127/004.png" width="500px" alt=""></p>
+<p>基本都按照提示改了相应的代码，但是遇到一个走不过去的坑，提示大意“警告被视为错误xxx”。</p>
+<p>本来的警告被当作了错误，几经搜索发现有人说去掉一个编译选项/WX，源码全部删除，重新从下载的压缩文件解压，搜索删除所有配置文件中的/WX，再次尝试，编译成功。</p>
+<p><img src="/images/20160127/005.png" width="500px" alt=""></p>
