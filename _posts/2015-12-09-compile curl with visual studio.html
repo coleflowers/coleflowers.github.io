@@ -8,6 +8,7 @@ sort: other
 <h1>在windows下用Visual Studio 2012编译curl</h1>
 <p>
 <pre>
+	<code>
 @echo off
 rem echo "download code"
 rem echo git clone https://github.com/bagder/curl.git
@@ -18,6 +19,7 @@ echo "start compile"
 nmake /f Makefile.vc mode=dll USE_SSSPI=no ENABLE_IDN=no
 echo "compilete"
 pause
+	</code>
 </pre>
 </p>
 <p>

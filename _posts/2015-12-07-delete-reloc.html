@@ -8,6 +8,7 @@ sort: other
 <h1>从可执行文件手动删除.reloc</h1>
 <p>
 	<pre>
+		<code>
 #include "windows.h"
 
 int main(int argc, char* argv[]){
@@ -19,6 +20,7 @@ int main(int argc, char* argv[]){
 	}
 	return 0;
 }		
+		</code>
 	</pre>
 </p>
 <p>以上代码Visual Studio编译为可执行文件Deletefile.exe。PEView查看PE如下截图：</p>
