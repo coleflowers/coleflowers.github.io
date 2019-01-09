@@ -3,15 +3,16 @@ permalink: /:year/:month/:day/:title.html
 auto: true
 pygments: true
 # baseurl: /coleflowers.github.com
-baseurl: /
+baseurl  : /
 comments :
 provider : disqus
-disqus :
+branch   : "gh-pages"
+disqus   :
 short_name : coleflowers
 # 基本参数
-title: 小马的Github博客
-production_url: http://coleflowers.github.io
-atom_path : /atom.xml
+title          : 码代码的马--Github博客
+production_url : https://coleflowers.github.io
+atom_path      : /atom.xml
 author :
   name : coleflowers
   email : coleflowers@163.com
