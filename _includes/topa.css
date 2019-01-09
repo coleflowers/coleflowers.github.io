@@ -3,6 +3,9 @@
 	color:#00f;
 }
 * {color: #555;}
+html,body {
+	width: 100%;
+}
 body, #top, #topb, #nav ul {
 	margin: 0px;
 	padding: 0px;
