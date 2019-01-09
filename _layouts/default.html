@@ -12,8 +12,8 @@
 {% for post in site.posts %}{% if post.csskey == 'yes' %}
 	<link rel="stylesheet" href="/styles/{{ post.cssfile }}">
 {% endif %}{% endfor%}
-	<link rel="stylesheet" href="{{ site.baseurl }}styles/default.css">
-	<script src="{{ site.baseurl }}scripts/highlight.pack.js"></script>
+	<link rel="stylesheet" href="/{{ site.baseurl }}styles/default.css">
+	<script src="/{{ site.baseurl }}scripts/highlight.pack.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
 	
 	<style type="text/css">
