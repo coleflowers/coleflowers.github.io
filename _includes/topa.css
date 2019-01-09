@@ -2,7 +2,8 @@
 	text-decoration: none;
 	color:#00f;
 }
-* {color: #555;}
+* {color: #555;
+max-width: 100%;}
 html,body {
 	width: 100%;
 }
@@ -91,4 +92,7 @@ h2 { /*控制标题h2*/
 	width: 20px;
 	height: 20px;
 	text-indent: -999em;
+}
+code {
+	max-width: 100%;
 }
