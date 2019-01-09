@@ -14,7 +14,7 @@ layout: nil
 <email>{{ site.author.email }}</email>
 </author>
 
-{% for post in site.posts %}
+{ % for post in site.posts % }
 <entry>
    <title>{{ post.title }}</title>
    <link href="{{ site.production_url }}{{ post.url }}"/>
@@ -40,6 +40,6 @@ layout: nil
    	原文网址：{{ site.production_url }}{{ post.url }}</p>]]>
    </content>
 </entry>
-{% endfor %}
+{ % endfor % }
 
 </feed>
