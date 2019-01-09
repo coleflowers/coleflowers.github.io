@@ -1,5 +1,7 @@
 permalink: /:year/:month/:day/:title.html
 # 当修改文件时重新生成站点
+# jekyll b -t
+# jekyll build
 # auto: true
 highlighter: true
 title: 码代码的马--Github博客
