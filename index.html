@@ -17,16 +17,16 @@ title: 小马的Github博客
 	    </div>
 	    <div id="skilla">
 	        <ul class="testa">
-				{ % for post in site.posts % }
-				    { % if post.sort == 'skill' % }
-				            <li>
-				                <div class="anchor">
-						    		<span class="icon">{{ post.date | date_to_string }}</span>
-						    		<a target="_blank" href="{{ post.url }}" title="{{ post.description }}">{{ post.title }}</a>
-				                </div>
-				            </li>
-				    { % endif % }
-				{ % endfor % }
+				{% for post in site.posts %}
+				    {% if post.subcode == 'skill' %}
+			            <li>
+			                <div class="anchor">
+					    		<span class="icon">{{ post.date | date_to_string }}</span>
+					    		<a target="_blank" href="{{ post.url }}" title="{{ post.description }}">{{ post.title }}</a>
+			                </div>
+			            </li>
+				    {% endif %}
+				{% endfor %}
 			</ul>
 	    </div>
 	    <div class="title">
@@ -34,16 +34,16 @@ title: 小马的Github博客
 	    </div>
 	    <div>
 	        <ul class="testa">
-				{ % for post in site.posts % }
-				    { % if post.sort == 'other' % }	    
-				            <li>
-				                <div class="anchor">
-						    		<span class="icon">{{ post.date | date_to_string }}</span>
-						    		<a target="_blank" href="{{ post.url }}" title="{{ post.description }}">{{ post.title }}</a>
-				                </div>
-				            </li>
-				    { % endif % }
-				{ % endfor % }
+				{% for post in site.posts %}
+				    {% if post.subcode == 'other' %}	    
+			            <li>
+			                <div class="anchor">
+					    		<span class="icon">{{ post.date | date_to_string }}</span>
+					    		<a target="_blank" href="{{ post.url }}" title="{{ post.description }}">{{ post.title }}</a>
+			                </div>
+			            </li>
+				    {% endif %}
+				{% endfor %}
 	        </ul>
 	    </div>
 	   
