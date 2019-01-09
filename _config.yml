@@ -3,6 +3,7 @@ permalink: /:year/:month/:day/:title.html
 auto: true
 pygments: true
 title : 码代码的马--Github博客
+github_username:  coleflowers
 # baseurl: /coleflowers.github.com
 baseurl  : /
 #comments :
