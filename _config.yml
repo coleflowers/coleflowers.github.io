@@ -1,7 +1,7 @@
 permalink: /:year/:month/:day/:title.html
 # 当修改文件时重新生成站点
-auto: true
-pygments: true
+# auto: true
+highlighter: true
 title: 码代码的马--Github博客
 github_username:  coleflowers
 production_url : https://coleflowers.github.io
