@@ -6,7 +6,7 @@ pygments: true
 baseurl  : /
 comments :
 provider : disqus
-branch   : "gh-pages"
+branch   : "master"
 disqus   :
 short_name : coleflowers
 # 基本参数
