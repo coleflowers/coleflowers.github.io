@@ -1,0 +1,28 @@
+---
+layout: default
+title: 用EditPlus和MinGW搭建C++开发环境
+description: EditPlus+MinGW for C++;windows下C++简易开发环境
+keywords: C++,编程,EditPlus,MinGW
+sort: skill
+---
+<p style="background:#eee">跟一个朋友聊起编程的乐趣，他也想自学一门编程语言，我建议他学习C++。想想以前在学校什么都不懂，搭好多次C++编程环境都没搞定，就先给他找了篇教程，<a href="http://www.cnblogs.com/liuxianan/archive/2013/01/15/2861082.html" target="_blank">EditPlus+MinGW搭建简易的C/C++开发环境</a>，我先看着搭了一遍，过程中发现有些细节说的不够清楚（我跟他都不是计算机相关专业），所以就重新整理了一份。</p>
+<h2>工具：</h2>
+<p>1、EditPlus(<a href="http://pan.baidu.com/share/link?shareid=3911155024&uk=3474496595" target="_blank">点击下载</a>)|(<a href="http://www.editplus.com/" target="_blank">去官网下载</a>)
+</p>
+<p>2、MinGW(<a href="http://pan.baidu.com/share/link?shareid=3915770723&uk=3474496595" target="_blank">点击下载</a>)|(<a href="http://www.mingw.org/" target="_blank">去官网下载</a>)
+</p>
+<h2>第一步：安装EditPlus和MinGW</h2>
+<p>EditPlus是一款文本编辑器，类似于windows下的记事本，但是比记事本功能多一些，如果安装了MinGW并且配置到了环境变量，那么用记事本写代码，cmd命令行也可以进行编译，但是太过于麻烦，所以选择EditPlus。如果你不麻烦，也可以用GVIM或者Sublime(需要学习使用方法)，当然，这时候第三步就不一样了。EditPlus安装比较简单，过程省略</p>
+<p>由于C++是编译型的语言，所以需要软件对写成的代码进行编译，这里选择MinGw，安装也比较简单，需要注意的是要记住安装的路径，如下图：</p>
+<div><img src="/images/20130731122619.jpg" alt="MinGW path" /></div>
+<p>以及选择安装组件，由于只是学习C++，我建议只勾选"C++ Compiler"，如下图：</p>
+<div><img src="/images/20130731122650.jpg" alt="C++ Compiler" /></div>
+<h2>第二步：配置环境变量</h2>
+<p>环境变量是干什么的？为什么要设置环境变量？请参考“<a href="http://baike.baidu.com/view/95930.htm" target="_blank">环境变量</a>”的百度百科词条。</p>
+<p>右键单击“我的电脑”->“属性”->“高级系统设置”->菜单选项切换到“高级”->单击“环境变量”，如下图</p>
+<div><img src="/images/20130731130339.jpg" alt="环境变量;path" /></div>
+<p>找到用户变量中的“path”->单击“编辑”->把MinGW安装路径下的bin(gcc.exe所在的文件夹，如果忘了，可以搜索gcc.exe)的路径填到变量值的最后边，我的安装目录是“D:\MinGW”，则填“D:\MinGW\bin”，需要注意的是要与已有的值用英文分号隔开。</p>
+<p>如果在上边的过程找不到用户变量path，可以新建名为path的变量，前提是要在用户变量(话说我也乱吹的，因为我没在系统变量里测试过到底可以不O(∩_∩)O~)。</p>
+<p>环境变量有没有配置好，可以通过开始菜单->运行->输入cmd确认打开windows下的命令行程序cmd.exe，你也可以从系统盘找到这个程序双击打开，比如在我电脑上是在<pre><code>C:\Windows\System32</code></pre>文件夹下边。打开之后在其中输入“path”，按回车键，如果再其中能够找到你输入的路径，比如<pre><code>D:\MinGW\bin</code></pre>，那么说明设置成功。</p>
+<h2>第三步：EditPlus参数设置</h2>
+<p>打开第一步安装的编辑器EditPlus，从菜单栏的下拉选项里找到“配置用户工具”(<a href="http://www.cnblogs.com/liuxianan/archive/2013/01/15/2861082.html" target="_blank">EditPlus+MinGW搭建简易的C/C++开发环境</a>里是在“工具”下边，但是我电脑上在“朗读文本”下边，不知道什么情况，反正你只要找到“配置用户工具”就可以设置了)，剩下的看<a href="http://www.cnblogs.com/liuxianan/archive/2013/01/15/2861082.html" target="_blank">EditPlus+MinGW搭建简易的C/C++开发环境</a>好了。</p>

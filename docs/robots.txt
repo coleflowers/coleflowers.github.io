@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /note.html
+Allow: /2013
+Disallow: /about.html
+

@@ -1,0 +1,124 @@
+---
+layout: default
+title: PHP中用TCPDF库输出动态输出PDF
+description: WEB开发中,在需要固定的排版、输出文档用来传阅及打印时,会考虑用PDF的形式动态输出页面,想做个新浪微博应用,输出授权用户的微博内容为PDF电子书,查阅资料得知,FPDF和TCPDF是两款纯PHP的库,由于中文输出乱码的原因,纠结了好长时间,最后选择用TCPDF
+keywords: PHP,TCPDF,中文
+sort: skill
+---
+<p style="background:#eee">WEB开发中,在需要固定的排版、输出文档用来传阅及打印时,会考虑用PDF的形式动态输出页面,想做个新浪微博应用,输出授权用户的微博内容为PDF电子书,查阅资料得知,FPDF和TCPDF是两款纯PHP的库,由于中文输出乱码的原因,纠结了好长时间,最后选择用TCPDF</p>
+<h2>关于TCPDF</h2>
+<p>TCPDF是一个开源项目，确切的说什一个开源的PHP类，用于动态地输出PDF，主页是<a href="http://www.tcpdf.org/" target="_blank">www.tcpdf.org</a>，只需要简单的配置，甚至直接上传代码到服务器就可以使用TCPDF。源代码保存在http://sourceforge.net/，由于某些原因，该网站无法在我国大陆访问，我下了最新版(2013年10月19日)保存在微盘，大家可以去我的微盘下载：<a href="http://vdisk.weibo.com/s/ufoJAuonzKsCz" target="_blank">
+tcpdf_6_0_039.zip</a>，文档目录如下<b>附录</b></p>
+<h2>应用</h2>
+<p>解压之后，目录结构如下<b>附录</b>，其中├─examples下为示例，可以一一打开效果，通过阅读tcpdf.php和示例中的代码可以具体学习。需要注意的是如果要输出汉字，要修改$pdf->SetFont()中第一个参数，可以设置为宋体(stsongstdlight)。</p>
+<h2>自定义LOGO</h2>
+<p>在输出的PDF中，如果保留页脚页眉的话，其中LOGO如果要自定义的话，需要在目录├─images下传入指定名称图片。这样有一个问题，如果要动态传入图片作为LOGO的时候，必须每次都去├─images下操作，经过阅读源代码，我发现，控制LOGO的代码如下<br>
+	<pre><code>
+if (($headerdata['logo']) AND ($headerdata['logo'] != K_BLANK_IMAGE)) {
+	$imgtype = TCPDF_IMAGES::getImageFileType(K_PATH_IMAGES.$headerdata['logo']);
+	if (($imgtype == 'eps') OR ($imgtype == 'ai')) {
+		$this->ImageEps($headerdata['logo'], '', '', $headerdata['logo_width']);
+	} elseif ($imgtype == 'svg') {
+		$this->ImageSVG($headerdata['logo'], '', '', $headerdata['logo_width']);
+	} else {
+		$this->Image($headerdata['logo'], '', '', $headerdata['logo_width']);
+	}
+	$imgy = $this->getImageRBY();
+} else { …………
+	</code></pre>
+每次传入图片的时候，程序都是用的相对位置来处理的，只需要把程序中$headerdata['logo']的地方改成绝对位置，给上边代码中所有$headerdata['logo']前边均缀上常量“K_PATH_IMAGES”（程序有定义的，不用再去定义它的值），例如：<pre><code>$this->ImageEps(K_PATH_IMAGES.$headerdata['logo'], '', '', $headerdata['logo_width']);</code></pre>这样以后每次传入的时候，都可以根据图片地址来自行制定，比如程序中输出的不用的内容需要不用的LOGO的时候方便动态控制。需要注意的是，如果做了以上修改，├─examples目录下的程序如果设置显示页眉页脚，都会出错，这时候只需要设置页眉函数的参数，如example_001.php中，设置页眉的代码<pre><code>
+$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 
+	PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));</code></pre>需要修改为<pre><code>
+$pdf->SetHeaderData(K_PATH_IMAGES.'/'.PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 
+	PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));</code></pre>当然要自定义为网络上的图片资源，只需要把第一个参数修改为图片地址组成的字符串，比如这样可以把LOGO改为百度的LOGO图片来输出到PDF：<pre><code>
+$pdf->SetHeaderData("http://www.baidu.com/img/bdlogo.gif", PDF_HEADER_LOGO_WIDTH, 
+	PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));</code></pre></p>
+<h2>附录</h2>
+<p>
+<pre>
+tcpdf
+│  CHANGELOG.TXT
+│  composer.json
+│  LICENSE.TXT
+│  ……………………
+│  
+├─config
+│      tcpdf_config.php
+│      
+├─examples
+│  │  example_001.php
+│  │  example_002.php
+│  │  example_003.php
+│  │  ……………………
+│  │  
+│  ├─barcodes
+│  │      example_1d_html.php
+│  │      example_1d_png.php
+│  │      example_1d_svg.php
+│  │      ………………
+│  │      
+│  ├─config
+│  │      tcpdf_config_alt.php
+│  │      
+│  ├─data
+│  │  │  chapter_demo_1.txt
+│  │  │  chapter_demo_2.txt
+│  │  │  table_data_demo.txt
+│  │  │  utf8test.txt
+│  │  │  
+│  │  └─cert
+│  │          tcpdf.crt
+│  │          tcpdf.fdf
+│  │          tcpdf.p12
+│  │          
+│  ├─images
+│  │      alpha.png
+│  │      bug.eps
+│  │      image_demo.jpg
+│  │      ………………
+│  │      
+│  └─lang
+│          afr.php
+│          ara.php
+│          aze.php
+│          ……………………
+│          
+├─fonts
+│  │  aealarabiya.ctg.z
+│  │  aealarabiya.php
+│  │  aealarabiya.z
+│  │  ……………………
+│  │  
+│  ├─ae_fonts_2.0
+│  │      ChangeLog
+│  │      COPYING
+│  │      README
+│  │      
+│  ├─dejavu-fonts-ttf-2.33
+│  │      AUTHORS
+│  │      BUGS
+│  │      langcover.txt
+│  │      ……………………
+│  │      
+│  └─freefont-20120503
+│          AUTHORS
+│          ChangeLog
+│          COPYING
+│          ……………………
+│          
+├─include
+│  │  sRGB.icc
+│  │  tcpdf_colors.php
+│  │  tcpdf_filters.php
+│  │  ……………………
+│  │  
+│  └─barcodes
+│          datamatrix.php
+│          pdf417.php
+│          qrcode.php
+│          
+└─tools
+        .htaccess
+        tcpdf_addfont.php
+</pre>     
+</p>
