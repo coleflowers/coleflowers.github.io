@@ -95,4 +95,5 @@ h2 { /*控制标题h2*/
 }
 code {
 	max-width: 100%;
+	    overflow: scroll;
 }
